@@ -11,19 +11,21 @@ var Request1 = {
     },
     view: function(){
         return [
-            m("html",[
-                m("title","Emotional Articles | Run Sentiment Analysis On Web Pages"),
-                m("body",[
-                    m("div", [
-                        m("h1", "Check Your Emotional Rank"),
-                        m("input[type=text]", {oninput: m.withAttr("value", Request1.link), value: Request1.link()}),
-                        m("p", Request1.link()),
-                        m("button", {onclick: Request1.click.bind(this)}, "Run a Test"),
-                        this.data() ? m("h2", this.data().aggregate.score) : m("p","")
-                    ])
-                ])
-            ])
-            
+                        m("title", "Sentiment Analysis On Your Blog Posts"),
+                        m("link[rel=stylesheet][href=css/bootstrap.css]"),
+                        m("body", [
+                            m("div[class=container]",[
+                                m("h1[class=heading]", "Check Your Emotional Rank"),
+                                m("p[class=[message]","Enter the link of the page you want to run the analysis on"),
+                        m("input[type=text][class=form-control][placeholder=http://techcrunch.com/about]", {oninput: m.withAttr("value", Request1.link), value: Request1.link()}),
+                       
+                        
+                        m("button[class=btn btn-lg btn-primary btn-block]", {onclick: Request1.click.bind(this)}, "Run a Test"),
+                         Request1.link() ? m("p[class=link-info]", "The URL you entered is "+Request1.link()) : m("p", ""),
+                        this.data() ? m("h1[class=score]", this.data().aggregate.score) : m("p","")
+                        
+                                ])
+                        ])
         ]
     }
 }
