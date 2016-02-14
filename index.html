@@ -11,12 +11,19 @@ var Request1 = {
     },
     view: function(){
         return [
-            m("h3", "Check Your Emotional Rank"),
-            //m("input", {onchange: m.withAttr("value", this.link), value: this.link()}),
-            m("input[type=text]", {oninput: m.withAttr("value", Request1.link), value: Request1.link()}),
-            m("p", Request1.link()),
-            m("button", {onclick: Request1.click.bind(this)}, "Run a Test"),
-            this.data() ? m("p", this.data().aggregate.score) : m("p","")
+            m("html",[
+                m("title","Emotional Articles | Run Sentiment Analysis On Web Pages"),
+                m("body",[
+                    m("div", [
+                        m("h1", "Check Your Emotional Rank"),
+                        m("input[type=text]", {oninput: m.withAttr("value", Request1.link), value: Request1.link()}),
+                        m("p", Request1.link()),
+                        m("button", {onclick: Request1.click.bind(this)}, "Run a Test"),
+                        this.data() ? m("h2", this.data().aggregate.score) : m("p","")
+                    ])
+                ])
+            ])
+            
         ]
     }
 }
