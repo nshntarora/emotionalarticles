@@ -15,16 +15,22 @@ var Request1 = {
                         m("link[rel=stylesheet][href=css/bootstrap.css]"),
                         m("body", [
                             m("div[class=container]",[
-                                m("h1[class=heading]", "Check Your Emotional Rank"),
-                                m("p[class=[message]","Enter the link of the page you want to run the analysis on"),
+                                m("h1[class=heading]", "Emotional Articles"),
+                                m("p[class=[message]","Enter the link of the page you want to run the analysis on. We pass the URL through HP's Sentiment Analysis API and display the response."),
                         m("input[type=text][class=form-control][placeholder=http://techcrunch.com/about]", {oninput: m.withAttr("value", Request1.link), value: Request1.link()}),
                        
                         
-                        m("button[class=btn btn-lg btn-primary btn-block]", {onclick: Request1.click.bind(this)}, "Run a Test"),
+                        m("button[class=btn btn-lg btn-primary btn-block]", {onclick: Request1.click.bind(this)}, "Submit URL"),
                          Request1.link() ? m("p[class=link-info]", "The URL you entered is "+Request1.link()) : m("p", ""),
-                        this.data() ? m("h1[class=score]", this.data().aggregate.score) : m("p","")
-                        
-                                ])
+                        this.data() ? m("h1[class=score]", this.data().aggregate.score.toFixed(2)) : m("p",""),
+                        this.data() ? m("h2", this.data().aggregate.sentiment) : m("p",""),
+                        m("p[class=footer]",[
+                            "Made By ",
+                            m("a[href=http://github.com/nshntarora]","Nishant Arora"),
+                            " To Try Out ",
+                            m("a[href=http://mithril.js.org]","Mithril")
+                            ])
+                            ])
                         ])
         ]
     }
