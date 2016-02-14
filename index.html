@@ -1,0 +1,24 @@
+<!doctype html>
+<script src="mithril.min.js"></script>
+<script>
+var Request1 = {
+    data: m.prop(false),
+    link: m.prop(""),
+    apikey: "<<HavenOnDemand API Key>>",
+    url: "https://api.havenondemand.com/1/api/sync/analyzesentiment/v1?url=",
+    click: function(){
+        m.request({method: "GET", url: this.url+this.link()+"&apikey="+this.apikey}).then(this.data);
+    },
+    view: function(){
+        return [
+            m("h3", "Check Your Emotional Rank"),
+            //m("input", {onchange: m.withAttr("value", this.link), value: this.link()}),
+            m("input[type=text]", {oninput: m.withAttr("value", Request1.link), value: Request1.link()}),
+            m("p", Request1.link()),
+            m("button", {onclick: Request1.click.bind(this)}, "Run a Test"),
+            this.data() ? m("p", this.data().aggregate.score) : m("p","")
+        ]
+    }
+}
+m.mount(document, Request1);
+</script>
